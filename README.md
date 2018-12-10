@@ -1,6 +1,6 @@
 # flutter_namegenerator
 
-A new Flutter project.
+This project is based on [Google's Write Your First Flutter App](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/#0)
 
 ## Getting Started
 

@@ -11,9 +11,12 @@ class _RandomWordsState extends State<RandomWords> {
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Startup Name Generator'),
         actions: <Widget>[
@@ -44,19 +47,20 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair pair) {
-    final bool alreadySaved = _saved.contains(pair);
+    final bool _alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
       ),
       trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
+        _alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: _alreadySaved ? Colors.red : null,
       ),
       onTap: () {
+        _displaySnackBar(this.context, pair.asPascalCase, _alreadySaved);
         setState(() {
-          if (alreadySaved) {
+          if (_alreadySaved) {
             _saved.remove(pair);
           } else {
             _saved.add(pair);
@@ -64,6 +68,15 @@ class _RandomWordsState extends State<RandomWords> {
         });
       }
     );
+  }
+
+  void _displaySnackBar(BuildContext context, String pair, bool alreadySaved) {
+    final _message = alreadySaved ? "Removed $pair from favorites" : "Added $pair to faovrites";
+    final _snack = new SnackBar(
+      content: Text(_message),
+      duration: Duration(milliseconds: 500),
+    );
+     _scaffoldKey.currentState.showSnackBar(_snack);
   }
 
   void _pushSaved() {

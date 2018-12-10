@@ -10,8 +10,9 @@ class _RandomWordsState extends State<RandomWords> {
   final List<WordPair> _suggestions = <WordPair>[];
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
-
+  
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var _textController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,63 @@ class _RandomWordsState extends State<RandomWords> {
         ],
       ),
       body: _buildSuggestions(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _renderFloatingActionBar(),
+    );
+  }
+
+  Widget _renderFloatingActionBar() {
+    return FloatingActionButton(
+      onPressed: _pushAdd,
+      tooltip: 'Add your own word',
+      child: Icon(Icons.add),
+    );
+  }
+
+  void _pushAdd() {
+    print('@fab has been pressed!');
+    showDialog(
+      context: this.context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add a custom word'),
+          content: _renderForm(),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Add'),
+              onPressed: () => _exitForm(),
+            ),
+            FlatButton(
+              child: Text('Close'),
+              onPressed: () => _exitForm()
+            )
+          ]
+        );
+      }
+    );
+  }
+
+  void _exitForm() {
+    _textController.clear();
+    Navigator.of(context).pop();
+  }
+
+  Widget _renderForm() {
+    return Container(
+      height: 150.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Custom word: '),
+          TextField(
+            autofocus: true,
+            controller: _textController,
+            decoration: InputDecoration(
+              hintText: 'RedPotato',
+            ),
+          ),
+        ]
+      )
     );
   }
 

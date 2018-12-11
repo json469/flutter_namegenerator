@@ -51,7 +51,7 @@ class _RandomWordsState extends State<RandomWords> {
           actions: <Widget>[
             FlatButton(
               child: Text('ADD'),
-              onPressed: (_textController.text.isNotEmpty) ? () =>  _addNewPair() : null,
+              onPressed: () => _addNewPair(),
             ),
           ],
         );

@@ -131,7 +131,7 @@ class _RandomWordsState extends State<RandomWords> {
     final _message = alreadySaved ? "Removed $pair from favorites" : "Added $pair to faovrites";
     final _snack = new SnackBar(
       content: Text(_message),
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 750),
     );
      _scaffoldKey.currentState.showSnackBar(_snack);
   }
@@ -159,7 +159,7 @@ class _RandomWordsState extends State<RandomWords> {
 
           return new Scaffold(
             appBar: new AppBar(
-              title: const Text('Saved Suggestions'),
+              title: const Text('Favorites'),
             ),
             body: new ListView(children: divided),
           );

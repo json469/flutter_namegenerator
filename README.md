@@ -15,6 +15,8 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
 
+## Aditional Features Added
+1. FAB to add user's own custom word pair.
 
 ## TODOs
 1. Make word generation semi-automatic not infinite.

@@ -62,6 +62,8 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   void _addNewPair() {
+    final _word = _textController.text.split(' ');
+    setState(() => _suggestions.insert(0, (new WordPair(_word[0], _word[1]))));
     _textController.clear();
     Navigator.of(context).pop();
   }
@@ -77,7 +79,7 @@ class _RandomWordsState extends State<RandomWords> {
             textCapitalization: TextCapitalization.words,
             controller: _textController,
             decoration: InputDecoration(
-              hintText: 'RedPotato',
+              hintText: 'Red Potato',
             ),
           ),
         ]

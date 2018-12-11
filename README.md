@@ -20,3 +20,5 @@ samples, guidance on mobile development, and a full API reference.
 1. Make word generation semi-automatic not infinite.
     Give user ability to choose to load X more etc.
 2. Finish implmenting add custom word function with the use of Flutter's form and validation.
+    1. Implement to actually add the custom word to the list.
+    2. Create a form to validate.

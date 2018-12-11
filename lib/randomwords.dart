@@ -51,31 +51,26 @@ class _RandomWordsState extends State<RandomWords> {
           content: _renderForm(),
           actions: <Widget>[
             FlatButton(
-              child: Text('Add'),
-              onPressed: () => _exitForm(),
+              child: Text('ADD'),
+              onPressed: () => (_textController.text.isNotEmpty) ? _addNewPair() : null,
             ),
-            FlatButton(
-              child: Text('Close'),
-              onPressed: () => _exitForm()
-            )
-          ]
+          ],
         );
       }
     );
   }
-
-  void _exitForm() {
+  void _addNewPair() {
     _textController.clear();
+    
     Navigator.of(context).pop();
   }
 
   Widget _renderForm() {
     return Container(
-      height: 150.0,
+      height: 50.0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Custom word: '),
           TextField(
             autofocus: true,
             controller: _textController,

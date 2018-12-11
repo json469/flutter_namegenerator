@@ -41,9 +41,8 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  void _pushAdd() {
-    print('@fab has been pressed!');
-    showDialog(
+  void _pushAdd() async {
+    await showDialog(
       context: this.context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -56,12 +55,14 @@ class _RandomWordsState extends State<RandomWords> {
             ),
           ],
         );
-      }
+      },
     );
+    // Changed _pushAdd as async to handle onClose and clear _textController upon exit
+    _textController.clear();
   }
+
   void _addNewPair() {
     _textController.clear();
-    
     Navigator.of(context).pop();
   }
 
@@ -73,6 +74,7 @@ class _RandomWordsState extends State<RandomWords> {
         children: [
           TextField(
             autofocus: true,
+            textCapitalization: TextCapitalization.words,
             controller: _textController,
             decoration: InputDecoration(
               hintText: 'RedPotato',

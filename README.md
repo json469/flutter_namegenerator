@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
+## TODOs
+1. Make word generation semi-automatic not infinite.
+    Give user ability to choose to load X more etc.
+2. Finish implmenting add custom word function with the use of Flutter's form and validation.

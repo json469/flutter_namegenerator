@@ -8,6 +8,7 @@ class RandomWordAddForm extends StatefulWidget {
 class _RandomWordAddFormState extends State<RandomWordAddForm> {
 
   final _formKey = GlobalKey<FormState>();
+  bool _autoValidate = false;
   final _textController = new TextEditingController();
 
   @override
@@ -19,6 +20,7 @@ class _RandomWordAddFormState extends State<RandomWordAddForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+      autovalidate: _autoValidate,
       child: Column(
         children: [
           TextFormField(
@@ -39,7 +41,10 @@ class _RandomWordAddFormState extends State<RandomWordAddForm> {
           ),
           FlatButton(
             child: Text('ADD'),
-            onPressed: () => (_formKey.currentState.validate()) ? _addNewPair() : null,
+            onPressed: () {
+              setState(() => _autoValidate = true);
+              if (_formKey.currentState.validate()) { _addNewPair(); }
+            }
           ),
         ]
       ),

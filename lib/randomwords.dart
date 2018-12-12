@@ -13,8 +13,6 @@ class _RandomWordsState extends State<RandomWords> {
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
   
-  var _textController = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +51,6 @@ class _RandomWordsState extends State<RandomWords> {
         );
       },
     );
-    // Changed _pushAdd as async to handle onClose and clear _textController upon exit
-    _textController.clear();
   }
 
   Widget _buildSuggestions() {

@@ -13,13 +13,11 @@ class _RandomWordsState extends State<RandomWords> {
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
   
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
   var _textController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Startup Name Generator'),
         actions: <Widget>[
@@ -72,10 +70,10 @@ class _RandomWordsState extends State<RandomWords> {
     if (index >= _suggestions.length) {
       _suggestions.addAll(generateWordPairs().take(4));
     }
-    return _buildRow(_suggestions[index]);
+    return _buildRow(context, _suggestions[index]);
   }
 
-  Widget _buildRow(WordPair pair) {
+  Widget _buildRow(BuildContext context, WordPair pair) {
     final bool _alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
@@ -87,7 +85,7 @@ class _RandomWordsState extends State<RandomWords> {
         color: _alreadySaved ? Colors.red : null,
       ),
       onTap: () {
-        _displaySnackBar(this.context, pair.asPascalCase, _alreadySaved);
+        _displaySnackBar(context, pair.asPascalCase, _alreadySaved);
         setState(() {
           if (_alreadySaved) {
             _saved.remove(pair);
@@ -105,7 +103,7 @@ class _RandomWordsState extends State<RandomWords> {
       content: Text(_message),
       duration: Duration(milliseconds: 750),
     );
-     _scaffoldKey.currentState.showSnackBar(_snack);
+    Scaffold.of(context).showSnackBar(_snack);
   }
 
   void _pushSaved() {

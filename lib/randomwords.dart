@@ -45,6 +45,7 @@ class _RandomWordsState extends State<RandomWords> {
       builder: (BuildContext context) {
         return SimpleDialog(
           title: Text('Add a custom Word Pair'),
+          contentPadding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
           children: <Widget>[
             RandomWordAddForm(),
           ],

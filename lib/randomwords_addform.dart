@@ -39,12 +39,15 @@ class _RandomWordAddFormState extends State<RandomWordAddForm> {
               hintText: 'RedPotato or Red Potato',
             ),
           ),
-          FlatButton(
-            child: Text('ADD'),
-            onPressed: () {
-              setState(() => _autoValidate = true);
-              if (_formKey.currentState.validate()) { _addNewPair(); }
-            }
+          ButtonTheme(
+            minWidth: double.infinity,
+            child: FlatButton(
+              child: Text('ADD'),
+              onPressed: () {
+                setState(() => _autoValidate = true);
+                if (_formKey.currentState.validate()) { _addNewPair(); }
+              }
+            ),
           ),
         ]
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+import 'randomwords_addform.dart';
+
 class RandomWords extends StatefulWidget {
   @override
   createState() => new _RandomWordsState();
@@ -35,56 +37,26 @@ class _RandomWordsState extends State<RandomWords> {
 
   Widget _renderFloatingActionBar() {
     return FloatingActionButton(
-      onPressed: _pushAdd,
+      onPressed: () => _showAddDialog(),
       tooltip: 'Add your own word',
       child: Icon(Icons.add),
     );
   }
 
-  void _pushAdd() async {
+  void _showAddDialog() async {
     await showDialog(
       context: this.context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Add a custom word'),
-          content: _renderForm(),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('ADD'),
-              onPressed: () => _addNewPair(),
-            ),
+        return SimpleDialog(
+          title: Text('Add a custom Word Pair'),
+          children: <Widget>[
+            RandomWordAddForm(),
           ],
         );
       },
     );
     // Changed _pushAdd as async to handle onClose and clear _textController upon exit
     _textController.clear();
-  }
-
-  void _addNewPair() {
-    final _word = _textController.text.split(' ');
-    setState(() => _suggestions.insert(0, (new WordPair(_word[0], _word[1]))));
-    _textController.clear();
-    Navigator.of(context).pop();
-  }
-
-  Widget _renderForm() {
-    return Container(
-      height: 50.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            autofocus: true,
-            textCapitalization: TextCapitalization.words,
-            controller: _textController,
-            decoration: InputDecoration(
-              hintText: 'Red Potato',
-            ),
-          ),
-        ]
-      )
-    );
   }
 
   Widget _buildSuggestions() {

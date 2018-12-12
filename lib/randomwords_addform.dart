@@ -28,9 +28,10 @@ class _RandomWordAddFormState extends State<RandomWordAddForm> {
             validator: (String text) {
               final _words = text.split(' ');
               if (_words[0] == "") { return 'Please enter a word pair.'; }
-              else if (RegExp('([a-z]*)([A-Z]*?)([A-Z][a-z]+){2}').hasMatch(_words.toString())) { return null; }  // Escape camelcased one word i.e. RedPotato
+              else if (RegExp('[!@#\$%^&*(),.?":{}|<>0-9]').hasMatch(_flatten(_words))) { return 'Please enter a valid word pair.'; }
+              else if (RegExp('([a-z]*)([A-Z]*?)([A-Z][a-z]+){2}').hasMatch(_words.toString())) { return null; }  // Escape camelcased one words i.e. RedPotato
+              else if (_words.length < 2 || _words[1].isEmpty) { return 'Not enough words, please type a word pair.'; }
               else if (_words.length > 2) { return 'Too many words, please type a word pair.'; }
-              else if (_words.length < 2) { return 'Not enough words, please type a word pair.'; }
             },
             decoration: InputDecoration(
               hintText: 'RedPotato or Red Potato',
@@ -50,5 +51,11 @@ class _RandomWordAddFormState extends State<RandomWordAddForm> {
     // setState(() => _suggestions.insert(0, (new WordPair(_word[0], _word[1]))));
     _textController.clear();
     Navigator.of(context).pop();
+  }
+
+  String _flatten(List text) {
+    var flat = "";
+    text.forEach((t) { flat+=t; });
+    return flat;
   }
 }
